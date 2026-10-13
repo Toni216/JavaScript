@@ -21,7 +21,7 @@ let paco;
 console.log(paco); //sale undefined
 
 paco = 2;
-console.log(paco) //sale un 2
+console.log(paco); //sale un 2
 
 /**
  * Tienes `let a = "forge";` y `let b = "fabric";`.
@@ -32,22 +32,23 @@ console.log(paco) //sale un 2
 let a = 'forge';
 let b = 'fabric';
 
-console.log(a)
-console.log(b)
+console.log(a);
+console.log(b);
 
-let c = a
-a = b
-b = c
+const c = a; // c no cambia así que const es mejor, pero lo habitual sería temp o aux
+a = b;
+b = c;
 
-console.log(a)
-console.log(b)
+console.log(a);
+console.log(b);
 
 /**
  * 1.4 Predecir: ¿qué imprime y por qué?
     let version = "1.20.1";let copia = version;version = "1.21";console.log(copia);
  */
 
-    //imprime 1.20.1
+    // imprime 1.20.1
+    // porque el copia es igual a version antes de cambiar, cuando cambia ya se ha asignado cambio.
 
 /**
  * Estos nombres de variable, ¿son válidos?
@@ -55,10 +56,11 @@ console.log(b)
  * `1version`, `mod-name`, `x`, `NumeroDeDescargas`, `let`, `numero_de_descargas`, `$precio`.
  */
 
-// 1version: no es válido, no se puede poner un número primero en el nombre de una variable, mejor version1
-// mod-name: valido, pero mejor modName para seguir la convencion
+// 1version: no es válido, no se puede poner un número primero en el nombre de una variable, mejor versionMinecraft.
+// mod-name: no es válido JS lee el guion como una resta y da error, pero mejor modName para seguir la convencion
 // x: valido, pero no te enteras a que referencia, mejor ponerle otro nombre
 // NumeroDeDescargas: válido y con una de las 3 convenciones, aunque tiene un 'De' de más, pero yo prefiero numeroDescargas
-// let: no es válido, es una palabra protegida
+// es válido pero en JS el PascalCase se reserva para clases. Para variables se usa camelCase
+// let: no es válido, es una palabra reservada
 // numero_de_descargas: válido, pero no sigue la convención, mejor como el que puse antes
 // $precio: válido, pero mejor poner precio a secas o precioDolar yo creo.
