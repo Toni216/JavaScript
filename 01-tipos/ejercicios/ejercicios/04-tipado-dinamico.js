@@ -4,7 +4,9 @@
  * y luego un boolean. ¿Da algún error? ¿Daría error en Java?
  */
 
-const nombre = true;
+let nombre = "paco";
+nombre = 2;
+nombre = true;
 console.log(typeof nombre);
 // no da ningún error
 // en Java si, ya que en Java hay que especificar si es un String, int, etc.
@@ -62,3 +64,15 @@ console.log(Number("")) // 0
 
 // Bug: el número de descargas no se está sumando bien, debería ser 2000 y no 1500500, se concatenan.
 // Bug: no aparece la version porque se ha guardado como 'number' y aparece como NaN
+
+let numero = parseInt("1500abc",10);
+console.log(numero); // da 1500, se come las letras.
+
+let numero2 = parseInt("1.5",10);
+console.log(numero2); // da 1, cuando ve el punto deja de mirar.
+
+let numero3 = Number("1500abc",10);
+console.log(numero3); // al añadir letras, pone NaN
+
+let numero4 = Number("1.5",10);
+console.log(numero4); // da 1.5 (?)
