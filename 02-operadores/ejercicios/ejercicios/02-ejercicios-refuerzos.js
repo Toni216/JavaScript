@@ -1,3 +1,5 @@
+"use strict";
+
 // R1 
 const descargasCurseforge = 12500;
 const descargasModrinth = 12500;
@@ -10,14 +12,14 @@ console.log(Number(descargasModrinthTexto) === descargasCurseforge);
 
 // R2
 function puedeBan(jugador) {
-    return jugador === "MODERADOR" ? true : false
-    || jugador === "OWNER" ? true : false
-    || jugador === "ADMIN" ? true : false;
+    return jugador === "MODERADOR" 
+    || jugador === "OWNER" 
+    || jugador === "ADMIN";
 }
 
 function puedeApagarServer(jugador) {
-    return jugador === "ADMIN" ? true : false
-    || jugador === "OWNER" ? true : false;
+    return jugador === "ADMIN"
+    || jugador === "OWNER";
 }
 
 const jugador1 = "moderador";
@@ -78,8 +80,8 @@ console.log(puedeEntrar(jugadorCuatro, "1.20.1"));
 */
 
 // R5
+const versionServidor = "Forge"
 function cargaMod(mod, dependenciasInstaladas) {
-    versionServidor = "Forge"
     return mod.loader.toUpperCase() === versionServidor.toUpperCase() && mod.version === "1.20.1" && dependenciasInstaladas;
 }
 
@@ -92,26 +94,21 @@ console.log("¿Se puede cargar? ", cargaMod(Prefix, false));
 console.log("¿Mostrar aviso? ", !cargaMod(Prefix, false));
 
 //R6 
-const maxJugadores = 20;
-function estadoServidor(jugadoresOnline) {
+function estadoServidor(jugadoresOnline, maxJugadores) {
     const porcentaje = jugadoresOnline * 100 / maxJugadores;
     return porcentaje === 100 ? "Lleno " + "(" + porcentaje + "%)"
     : porcentaje >= 80 && porcentaje < 100 ? "Casi lleno " + "(" + porcentaje + "%)"
     : "Disponible " + "(" + porcentaje + "%)"
 }
 
-console.log("Estado: ", estadoServidor(18));
-console.log("Estado: ", estadoServidor(20));
-console.log("Estado: ", estadoServidor(5));
+console.log("Estado: ", estadoServidor(18, 20));
+console.log("Estado: ", estadoServidor(20, 20));
+console.log("Estado: ", estadoServidor(5, 20));
 
 // R7
 // Backups
-const horasBackup = [ 0, 6, 12, 18 ]
 function tocaBackup(hora)  {
-    return horasBackup[0] === hora 
-    || horasBackup[1] === hora 
-    || horasBackup[2] === hora 
-    || horasBackup[3] === hora ? "Si" : "No"
+    return hora % 6 === 0;
 }
 
 console.log("¿Toca backup a las 12? ", tocaBackup(12));
@@ -129,15 +126,15 @@ console.log("Jugadores sin equipo: ",jugadores % jugadoresXEquipo);
 // R8
 console.log(24 % 6);   // R8.1 - 0 V
 console.log(25 % 6);   // R8.2 - 1 V
-console.log(6 % 25);   // R8.3 - -10 X -> 6 
-console.log(0 % 5);    // R8.4 - Infinite X -> 0
-console.log(-9 % 4);   // R8.5 - -5 X -> -1
-console.log(9 % -4);   // R8.6 (¿de quién se copia el signo?) 5 X -> 1
+console.log(6 % 25);   // R8.3 - -10 X -> 6 el 25 cabe 0 veces en 6, por lo que no quito nada y sobra el 6.
+console.log(0 % 5);    // R8.4 - Infinite X -> 0 no hay nada que repartir, por lo que sobra
+console.log(-9 % 4);   // R8.5 - -5 X -> -1 es lo mismo que si son dos numeros positivos solo que añadiendo el menos al resultado.
+console.log(9 % -4);   // R8.6 (¿de quién se copia el signo?) 5 X -> 1 aqui el numero negativo no cambia anda.
 
 // R9 
 let nivel = 1; 
-const x = nivel++; // para el momento de terminar la línea ya vale 2
-const y = nivel++ + ++nivel; // 2 (que se suma luego ++) + 3 = 5
+const x = nivel++; // para el momento de terminar la línea ya vale 1
+const y = nivel++ + ++nivel; // 3 + 3 = 6
 console.log(x, y, nivel);   // R9.1 (haz la tabla de pasos en un comentario) 2 5 4 X -> 1 6 4
 
 let vidas = 3;
@@ -198,8 +195,7 @@ console.log(cuarto(config));
 // R12
 // R12.1
 function porcentajeOcupacion(online, max) {
-  resultado = online * 100 / max;
-  console.log(resultado);
+  return online * 100 / max;
 }
 // No parece haber ningun bug, pero supongo que es preferible poner return online * 100 / max y poner el console.log fuera tipo
 // console.log(porcentajeOcupacion(5,20));
@@ -230,16 +226,16 @@ console.log(puedeEntrar({ whitelist: true, op: false, baneado: true })); // debe
 function puedeBanear(rango) {
     return rango === "MODERADOR"
     || rango === "ADMIN"
-    || rango === "OWNER" ? true : false;
+    || rango === "OWNER";
 }
 function puedeParar(rango) {
     return rango === "ADMIN"
-    || rango === "OWNER"  ? true : false;
+    || rango === "OWNER";
 }
 
-jugadorM = "MODERADOR"
-jugadorA = "ADMIN"
-jugadorO = "OWNER"
+const jugadorM = "MODERADOR"
+const jugadorA = "ADMIN"
+const jugadorO = "OWNER"
 console.log(puedeBanear(jugadorM));
 console.log(puedeBanear(jugadorA));
 console.log(puedeBanear(jugadorO));
