@@ -132,7 +132,7 @@ let a = 10;
 while (a < 5) {
   a++;
 }
-console.log(a); // 3.1 - Solo entra en el bucle si a es menor a 5, al a ser 10, es mayor y no entra, por lo que devuelve 10
+ console.log(a); // 3.1 - Solo entra en el bucle si a es menor a 5, al a ser 10, es mayor y no entra, por lo que devuelve 10
 
 let b = 10;
 do {
@@ -143,3 +143,80 @@ console.log(b); // 3.2 - Aqui si que se ha sumado, se ejecutó 1 vez el bucle y 
 // 3.3 - do while a diferencia de while ejecuta el código al menos una vez aunque no cumpla la condición, ya que lo revisa una vez ejecutado.
 
 // 3.4 
+let descargasMod = 1500;
+let meses = 0;
+while (descargasMod <= 100000) {
+  descargasMod *= 2;
+  meses++;
+}
+
+console.log('Meses:', meses, 'Descargas:', descargasMod);
+
+// no sabría explicarme
+
+// 3.5
+let maxIntentos = 5;
+let intentos = 1;
+let intentoExitoso = 3;
+let resultado;
+
+do {
+  if (intentoExitoso === intentos) {
+    resultado = 'conectado';
+  } else {
+    resultado = 'fallo'
+  }
+
+  console.log('Intento', intentos, ':', resultado);
+  intentos++;
+} while (resultado === 'fallo' && intentos <= maxIntentos);
+
+if (resultado === 'fallo' && intentos >= maxIntentos) {
+  console.log('No se pudo conectar');
+}
+
+// Bloque 4
+for (let i = 0; i < 10; i += 3) {
+  console.log(i);
+}
+// 4.1 - 0 3 6 9 V
+
+for (let i = 3; i > 0; i--) {
+  console.log("Reinicio en " + i);
+}
+// 4.2 - Reinicio en 3 Reinicio en 2 Reinicio en 1 V
+
+// for (let i = 0; i < 3; i++) {}
+// console.log(i);
+// 4.3 - No está dentro del bucle for así que no debería imprimir nada. X Da error porque no encuentra la i al estar dentro del bucle.
+
+// for (const j = 0; j < 3; j++) {
+//   console.log(j);
+// }
+
+// 4.4 - Si V
+
+//4.5 
+
+const listarVersiones = [ "1.18.2", "1.19.2", "1.20.1", "1.20.4" ];
+for (const version of listarVersiones) {
+  let i = 1;
+  console.log(i + ": ",version);
+}
+
+// 4.6
+let totalDescargas = 0;
+
+for (let i = 0; i < descargas.length; i++) {
+  totalDescargas += descargas[i];
+}
+console.log(totalDescargas);
+
+let maximoDescargas = 0;
+
+for (let i = 0; i < descargas.length; i++) {
+  if ( maximoDescargas < descargas[i] )
+    maximoDescargas = descargas[i];
+} 
+console.log(maximoDescargas);
+
