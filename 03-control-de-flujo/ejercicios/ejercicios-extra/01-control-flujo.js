@@ -199,9 +199,10 @@ for (let i = 3; i > 0; i--) {
 //4.5 
 
 const listarVersiones = [ "1.18.2", "1.19.2", "1.20.1", "1.20.4" ];
+let i = 1;
 for (const version of listarVersiones) {
-  let i = 1;
   console.log(i + ": ",version);
+  i++;
 }
 
 // 4.6
@@ -220,3 +221,60 @@ for (let i = 0; i < descargas.length; i++) {
 } 
 console.log(maximoDescargas);
 
+// Bloque 5
+// 5.1
+const loaders = ["forge", "fabric"];
+for (const i in loaders) {
+  console.log(i, typeof i);
+}
+// 5.1 - forge string fabric string X 0 string 1 string
+
+for (const letra of "Mod") {
+  console.log(letra);
+}
+// 5.2 - M o d V No sabía que se puede hacer con las palabras.
+
+// const mod = { nombre: "PrefixTag", loader: "forge" };
+// for (const x of mod) {
+//   console.log(x);
+// }
+// 5.3 (¿qué pasa?) - debería fallar porque eso es para los arrays no para los objetos V
+// 5.4 - el for in para objetos y el for of para arrays
+
+// 5.5 - 
+let contarForge = 0;
+let contarFabric = 0;
+for (const contarPorLoader of mods) {
+  if (contarPorLoader.loader === "forge") {
+    contarForge++;
+  } else {
+    contarFabric++;
+  }
+}
+
+console.log("Forge: " + contarForge + " - Fabric: " + contarFabric);
+
+
+// 5.6 
+for (const propiedad in mods[0]) {
+  console.log(`${propiedad}: ${mods[0][propiedad]}`);
+}
+// este ejercicio no lo entiendo bien la vd, he tenido que mirar por internet.
+
+// Bloque 6
+// 6.1 
+for (const nombresActivos of mods) {
+  if (nombresActivos.activo) {
+    console.log(nombresActivos.nombre);
+  }
+}
+
+// no sé como implementar aquí continue ni el proque haría falta.
+
+// 6.2 
+for (const primerIncompatible of mods) {
+  if (versionServidor !== primerIncompatible.version) {
+    console.log("Primer incompatible: " + primerIncompatible.nombre);
+    break;
+  }
+}
