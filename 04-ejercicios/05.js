@@ -1,4 +1,4 @@
-let array = [ 2, 5, 7, 15, -5, -100, 55];
+let array = [ 2, 5, 7, 15, -5, -100, 55 ];
 
 function getMenorMayor(arr) {
     let menor = arr[0];
