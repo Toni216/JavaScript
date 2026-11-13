@@ -1,20 +1,18 @@
 function boletos(nombreEvento, duracion, boletosDisponibles) {
-    let boletos;
     this.nombreEvento = nombreEvento;
     this.duracion = duracion;
-    this.boletos = boletosDisponibles;
 
     this.mostrarInfo = function() {
-        console.log(`El evento ${this.nombreEvento} dura ${this.duracion} minutos y quedan ${this.boletosDisponibles}`);
+        console.log(`El evento ${this.nombreEvento} dura ${this.duracion} minutos y quedan ${boletosDisponibles} boletos`);
     }
 
     this.comprarBoleto = function(cantidad) {
-        if (this.boletosDisponibles === 0) {
-            console.log("Ya no quedan boletos");
+        if (cantidad > boletosDisponibles) {
+            console.log("No quedan tantos boletos a la venta");
         } else if (cantidad > 5) {
             console.log("Solo se pueden comprar 5 boletos seguidos.")
         } else {
-            this.boletosDisponibles -= cantidad;
+            boletosDisponibles -= cantidad;
             console.log(`Has comprado ${cantidad} boleto(s)`);
         }
     }
@@ -22,17 +20,16 @@ function boletos(nombreEvento, duracion, boletosDisponibles) {
 
     this.cancelarBoleto = function(cantidad) {
         if (cantidad > 0) {
-            this.boletosDisponibles += cantidad;
+            boletosDisponibles += cantidad;
         }
     }
 }
 
-const eventoRajoy = new boletos("Rajoy", 60, 40);
-
+const eventoRajoy = new boletos("Rajoy", 60, 50);
 
 eventoRajoy.mostrarInfo();
 eventoRajoy.comprarBoleto(3);
 eventoRajoy.mostrarInfo();
-eventoRajoy.comprarBoleto(6);
-eventoRajoy.cancelarBoleto(2);
+eventoRajoy.boletosDisponibles = 100;
+eventoRajoy.cancelarBoleto(1);
 eventoRajoy.mostrarInfo();
