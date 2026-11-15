@@ -1,45 +1,60 @@
 function Mob(nombre, vida, ataques) {
-    
+    this.nombre = nombre;
+
     for (const ataque of ataques) {
-        ataque.enfriamiento = 0;
+        if (!("enfriamiento" in ataque)) {
+            ataque.enfriamiento = 0;
+        }
     }
 
     this.atacar = function(objetivo, indice) {
         if (vida <= 0) {
-            console.log(`${nombre} no puede atacar: ha sido derrotado.`)
-        } else if (indice > ataques.length) {
-            console.log(`${nombre} no tiene ese ataque.`)
-        } else if (ataques[indice].enfriamiento > 0) {
-            console.log(`${ataques[indice].nombre} aún no está listo (turnos restantes: ${ataques[indice].enfriamiento})`)
-        } else {
-            console.log(`${nombre} usa ${ataques[indice].nombre}`)
-            objetivo.recibirDaño(ataques[indice].puntos);
-            ataques[indice].enfriamiento = ataques[indice].recarga;
+            console.log(`${nombre} no puede atacar: ha sido derrotado.`);
+            return;
+        } 
+
+        const ataque = ataques[indice];
+
+        if (ataque === undefined) {
+            console.log(`${nombre} no tiene ese ataque.`);
+            return;
         }
+
+        if (ataque.enfriamiento > 0) {
+            console.log(`${ataques[indice].nombre} aún no está listo (turnos restantes: ${ataques[indice].enfriamiento})`);
+            return;
+        }
+        
+            console.log(`${this.nombre} usa ${ataque.nombre}`)
+            objetivo.recibirDaño(ataque.puntos);
+            ataque.enfriamiento = ataque.recarga;
     };
     
     this.recibirDaño = function(puntos) {
         if (vida <= 0) {
-            console.log (`${nombre} ya había sido derrotado.`)
-        } else {
-            if (vida - puntos > 0) {
-                vida = vida - puntos;
-                console.log(`${nombre} ha recibido ${puntos} de daño. Vida: ${vida}`)
-            } else {
-                vida = 0;
-                console.log(`${nombre} ha recibido ${puntos} de daño. Vida: ${vida}`)
-                console.log(`${nombre} ha sido derrotado`)
-            }
-        }
+            console.log (`${nombre} ya había sido derrotado.`);
+            return
+        } 
 
+        vida -= puntos;
+        if (vida < 0) {
+            vida = 0;
+        }
+        console.log(`${nombre} ha recibido ${puntos} de daño. Vida: ${vida}`)
+
+        if (vida === 0) {
+            console.log(`${nombre} ha sido derrotado`)
+        }
     };
 
     this.pasarTurno = function() {
         for (const ataque of ataques) {
-            ataque.enfriamiento--;
+            if (ataque.enfriamiento > 0) {
+                ataque.enfriamiento--;
+            }            
         }
     }
-}
+};
 
 const zombi = new Mob("Zombi", 40, [
   { nombre: "Mordisco", puntos: 10, recarga: 2 },

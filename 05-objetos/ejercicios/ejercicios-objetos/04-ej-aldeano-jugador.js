@@ -2,27 +2,23 @@ function Aldeano(nombre, ofertas) {
     this.nombre = nombre;
 
     this.precioDe = function(indice) {
-        if (!(ofertas[indice])) {
-            return null;
-        } else {
-            return ofertas[indice].precio;
-        }
-    }
-
-    this.nombreDe = function(indice) {
-        return ofertas[indice].item;
-    }
-
-    this.vender = function(indice) {
-        const nombre = this.nombreDe(indice);
-        if (ofertas[indice].stock > 0) {
-            ofertas[indice].stock--;
-            return nombre;
-        } else {
+        const oferta = ofertas[indice];
+        if (oferta === undefined) {
             return null;
         }
+        return oferta.precio;
     }
+
+    this.vender = function (indice) {
+        const oferta = ofertas[indice];
+        if (oferta === undefined || oferta.stock <= 0) {
+            return null;
+        }
+        oferta.stock--;
+        return oferta.item;
+    };
 }
+
 
 const herrero = new Aldeano("Herrero", [
   { item: "Espada de hierro", precio: 5, stock: 1 },
@@ -35,17 +31,26 @@ function Jugador(nombre, esmeraldas) {
     const inventario = [];
 
     this.comprar = function(aldeano, indice){
-        if (aldeano.precioDe(indice) === null) {
-            console.log(`${aldeano.nombre} no tiene esa oferta`)
-        } else if (esmeraldas < aldeano.precioDe(indice)) {
-            console.log(`${nombre} no tiene suficientes esmeraldas (faltan ${aldeano.precioDe(indice) - esmeraldas})`)
-        } else if (!(aldeano.vender(indice))) {
-            console.log(`${aldeano.nombre} se ha quedado sin stock.`)
-        } else {
-            esmeraldas -= aldeano.precioDe(indice);
-            console.log(`${nombre} compra ${aldeano.nombreDe(indice)} por ${aldeano.precioDe(indice)} esmeraldas`)
-            inventario.push(aldeano.nombreDe(indice))
+        const precio = aldeano.precioDe(indice);
+
+        if (precio === null) {
+            console.log(`${aldeano.nombre} no tiene esa oferta`);
+            return;
         }
+
+        if (this.esmeraldas < precio) {
+            console.log(`${this.nombre} no tiene suficientes esmeraldas (faltan ${precio - this.esmeraldas})`);
+            return;
+        }
+        const item = aldeano.vender(indice);
+
+        if (item === null) {
+            console.log(`${aldeano.nombre} se ha quedado sin stock`);
+            return;
+        }
+        this.esmeraldas -= precio;
+        inventario.push(item);
+        console.log(`${this.nombre} compra ${item} por ${precio} esmeralda(s)`);
     }
 
     this.mostrar = function() {
