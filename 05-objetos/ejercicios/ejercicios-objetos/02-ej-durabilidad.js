@@ -1,4 +1,4 @@
-function Herramienta(nombre, durabilidad) {
+function Herramienta(nombre, durabilidadMax) {
     this.nombre = nombre;
     let durabilidad = durabilidadMax;
 
@@ -11,7 +11,7 @@ function Herramienta(nombre, durabilidad) {
         if (durabilidad === 0) {
             console.log(`${this.nombre} se ha roto`);
         } else {
-            console.log(`Has usado ${this.nombre}. Durabilidad ${durabilidad}/3`)
+            console.log(`Has usado ${this.nombre}. Durabilidad ${durabilidad}/${durabilidadMax}`)
         }
     };
 
@@ -30,7 +30,7 @@ function Herramienta(nombre, durabilidad) {
         if (durabilidad > durabilidadMax) {
             durabilidad = durabilidadMax;
         }
-        console.log(`Has reparado ${this.nombre}. Durabilidad ${durabilidad}/3`)
+        console.log(`Has reparado ${this.nombre}. Durabilidad ${durabilidad}/${durabilidadMax}`)
     }
 }
 

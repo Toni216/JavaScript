@@ -54,7 +54,7 @@ function Jugador(nombre, esmeraldas) {
     }
 
     this.mostrar = function() {
-        console.log(`${nombre} tiene ${esmeraldas} esmeraldas`)
+        console.log(`${this.nombre} tiene ${this.esmeraldas} esmeraldas`)
         for (const item of inventario) {
             console.log(`- ${item}`);
         }
